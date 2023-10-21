@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     public Transform player; // Asigna el objeto del jugador desde el inspector
-    public float speed = 0.01f;
-    public float accuracy = 1f;
+    public float speed = 7f;
+    public float accuracy = 0.01f;
 
     private void Start()
     {

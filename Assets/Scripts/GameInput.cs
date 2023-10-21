@@ -27,4 +27,8 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
+
+    public bool IsRunning() {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
 }
