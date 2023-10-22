@@ -7,26 +7,59 @@ public class Ghost : MonoBehaviour
     public Transform player; // Asigna el objeto del jugador desde el inspector
     public float speed = 7f;
     public float accuracy = 0.01f;
+    public float wanderRadius = 10f;
+    public float wanderTimer = 5f;
 
+    private float timer;
+    private Vector3 randomDirection;
     private void Start()
     {
-        
+        timer = wanderTimer;
     }
 
     private void LateUpdate()
     {
         if (player != null)
         {
-            // Calcula la dirección hacia el jugador
-            this.transform.LookAt(player.position);
             Vector3 directionToPlayer = player.position - this.transform.position;
-            Debug.DrawRay(this.transform.position, directionToPlayer, Color.red);
-
-            if (directionToPlayer.magnitude > accuracy)
-            {
-                // Mueve el objeto
-                this.transform.Translate(directionToPlayer.normalized * speed * Time.deltaTime, Space.World);
+            
+            if (directionToPlayer.magnitude > 100f) {
+                Debug.DrawRay(transform.position, transform.forward * wanderRadius, Color.red);
+                Wander();
+            } else {
+                Debug.DrawRay(this.transform.position, directionToPlayer, Color.red);
+                Seeking();
             }
+        }
+    }
+
+    private void Wander() {
+        timer += Time.deltaTime;
+
+        if (timer >= wanderTimer)
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+            randomDirection += transform.position;
+
+            // Asegúrate de que el enemigo no se eleve por encima o por debajo del terreno
+            randomDirection.y = transform.position.y;
+
+            transform.LookAt(randomDirection);
+            timer = 0;
+        }
+
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+    }
+
+    private void Seeking() {
+        Vector3 directionToPlayer = player.position - this.transform.position;
+        // Calcula la dirección hacia el jugador
+        this.transform.LookAt(player.position);
+        // Si la distancia es mayor que la precisión, mueve el objeto
+        if (directionToPlayer.magnitude > accuracy)
+        {
+            // Mueve el objeto
+            this.transform.Translate(directionToPlayer.normalized * speed * Time.deltaTime, Space.World);
         }
     }
 }
