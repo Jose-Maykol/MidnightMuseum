@@ -308,17 +308,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5200c0c2041ed4384ecd2c713e861a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningSpeed: 25
+  jumpKey: 32
+  runKey: 304
+  runningSpeed: 250
   moveSpeed: 15
+  jumpForce: 30
+  jumpColdDown: 0.5
+  airMultiplier: 0.4
   Ground:
     serializedVersion: 2
     m_Bits: 1024
   groundDrag: 5
-  jumpForce: 30
-  jumpColdDown: 0.5
-  airMultiplier: 0.4
   playerHeight: 4
   orientation: {fileID: 1945667931}
+  state: 0
 --- !u!1 &627098974
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1554362903}
-  speed: 5
+  speed: 12
   accuracy: 0.1
 --- !u!4 &627098976
 Transform:
@@ -360,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 627098974}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.544716, y: 3.0434875, z: -10}
+  m_LocalPosition: {x: 172, y: 3.0434875, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -4,26 +4,40 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode runKey = KeyCode.LeftShift;
+    [Header("Movement")]
     public float runningSpeed = 50f;
     public float moveSpeed = 25f;
-    public LayerMask Ground;
-    bool isGrounded;
-    public float groundDrag = 6f;
 
+    [Header("Jump")]
     public float jumpForce = 5f;
     public float jumpColdDown = 0.25f;
     public float airMultiplier = 0.4f;
-    bool readyToJump;
+
+    [Header("Ground")]
+    public LayerMask Ground;
+    bool isGrounded;
+    public float groundDrag = 6f;
     public float playerHeight = 2f;
+    
+    bool readyToJump;
 
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
-
     private Rigidbody rb;
+
+    public State state;
+
+    public enum State {
+        Normal,
+        Running,
+        Jumping
+    }
 
     private void Start() {
         rb = GetComponentInChildren<Rigidbody>();
@@ -35,6 +49,7 @@ public class Player : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.2f, Ground);
         Inputs();
         SpeedControl();
+        HandlerState();
         
         if (isGrounded) {
             rb.drag = groundDrag;
@@ -45,6 +60,18 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() {
         Move();
+    }
+
+    private void HandlerState() {
+        if (isGrounded && Input.GetKey(runKey)) {
+            state = State.Running;
+            moveSpeed = runningSpeed;
+        } else if (isGrounded && Input.GetKey(jumpKey)) {
+            state = State.Jumping;
+        } else {
+            state = State.Normal;
+            moveSpeed = 25f;
+        }
     }
 
     private void Inputs() {
