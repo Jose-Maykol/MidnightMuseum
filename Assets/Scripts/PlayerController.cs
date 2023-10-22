@@ -48,8 +48,8 @@ public class Player : MonoBehaviour
     }
 
     private void Inputs() {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
         if (Input.GetKey(KeyCode.Space) && isGrounded && readyToJump) {
             readyToJump = false;
             Jump();
@@ -58,8 +58,12 @@ public class Player : MonoBehaviour
     }
 
     private void Move() {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if (horizontalInput != 0 || verticalInput != 0) {
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        } else {
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
+        }
         if (isGrounded) {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         } else {
