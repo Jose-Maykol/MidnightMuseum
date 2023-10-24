@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
+    [Header("Player")]
     public Transform player; // Asigna el objeto del jugador desde el inspector
-    public float speed = 7f;
+
+    [Header("Movement")]
+    private float speed;
+
+    public float walkingSpeed = 7f;
+    public float runningSpeed = 10f;
     public float accuracy = 0.01f;
+    [Header("Wandering")]
     public float wanderRadius = 10f;
     public float wanderTimer = 5f;
 
@@ -15,6 +22,7 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         timer = wanderTimer;
+        speed = walkingSpeed;
     }
 
     private void LateUpdate()
@@ -24,10 +32,12 @@ public class Ghost : MonoBehaviour
             Vector3 directionToPlayer = player.position - this.transform.position;
             
             if (directionToPlayer.magnitude > 100f) {
+                speed = walkingSpeed;
                 Debug.DrawRay(transform.position, transform.forward * wanderRadius, Color.red);
                 Wander();
             } else {
                 Debug.DrawRay(this.transform.position, directionToPlayer, Color.red);
+                speed = runningSpeed;
                 Seeking();
             }
         }
@@ -60,6 +70,9 @@ public class Ghost : MonoBehaviour
         {
             // Mueve el objeto
             this.transform.Translate(directionToPlayer.normalized * speed * Time.deltaTime, Space.World);
+        } else {
+            // Si no, detente
+            this.transform.Translate(Vector3.zero);
         }
     }
 }

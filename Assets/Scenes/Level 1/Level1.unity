@@ -310,11 +310,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpKey: 32
   runKey: 304
-  runningSpeed: 250
+  runningSpeed: 25
   moveSpeed: 15
   jumpForce: 30
   jumpColdDown: 0.5
-  airMultiplier: 0.4
+  airMultiplier: 1
   Ground:
     serializedVersion: 2
     m_Bits: 1024
@@ -352,8 +352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1554362903}
-  speed: 15
-  accuracy: 0.1
+  walkingSpeed: 10
+  runningSpeed: 20
+  accuracy: 0.5
   wanderRadius: 1
   wanderTimer: 2
 --- !u!4 &627098976
