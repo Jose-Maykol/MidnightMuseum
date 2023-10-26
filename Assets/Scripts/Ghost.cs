@@ -70,7 +70,7 @@ public class Ghost : MonoBehaviour
         {
             // Mueve el objeto
             this.transform.Translate(directionToPlayer.normalized * speed * Time.deltaTime, Space.World);
-        } else {
+        } else if (directionToPlayer.magnitude < accuracy) {
             // Si no, detente
             this.transform.Translate(Vector3.zero);
         }

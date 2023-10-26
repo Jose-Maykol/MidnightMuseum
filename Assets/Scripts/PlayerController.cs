@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     public KeyCode runKey = KeyCode.LeftShift;
     [Header("Movement")]
     public float runningSpeed = 50f;
-    public float moveSpeed = 25f;
+    public float walkingSpeed = 25f;
+    private float moveSpeed;
 
     [Header("Jump")]
     public float jumpForce = 5f;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     private void Start() {
         rb = GetComponentInChildren<Rigidbody>();
         rb.freezeRotation = true;
+        moveSpeed = walkingSpeed;
         readyToJump = true;
     }
 
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
             state = State.Jumping;
         } else {
             state = State.Normal;
-            moveSpeed = 25f;
+            moveSpeed = walkingSpeed;
         }
     }
 
@@ -100,7 +102,6 @@ public class Player : MonoBehaviour
 
     private void SpeedControl() {
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         if (flatVelocity.magnitude > moveSpeed) {
             Vector3 newVelocity = flatVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(newVelocity.x, rb.velocity.y, newVelocity.z);
