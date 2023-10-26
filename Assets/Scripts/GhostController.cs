@@ -37,7 +37,6 @@ public class Ghost : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log(playerFound);
             Vector3 directionToPlayer = player.position - this.transform.position;
             if (directionToPlayer.magnitude > 100f) {
                 speed = walkingSpeed;
