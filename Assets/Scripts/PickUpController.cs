@@ -14,7 +14,7 @@ public class PickUpController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetMouseButtonDown(0)) {
             if (isPickUp) {
                 DropObject();
             } else {
@@ -26,11 +26,15 @@ public class PickUpController : MonoBehaviour
     void PickUpObject () {
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Quaternion.Euler(0, 30, 0) * transform.forward);
-        Debug.DrawRay(transform.position, transform.forward * 5f, Color.red, 1f);
-        if (Physics.Raycast(ray, out hit, 5f)) {
+        Debug.DrawRay(transform.position, transform.forward * 8f, Color.red, 1f);
+        if (Physics.Raycast(ray, out hit, 8f)) {
             if (hit.collider.CompareTag("Pickable")) {
                 Debug.Log("Pickable");
                 objectPickUp = hit.collider.transform;
+                Collider objectCollider = objectPickUp.GetComponent<Collider>();
+                if (objectCollider) {
+                    objectCollider.enabled = false;
+                }
                 objectPickUp.parent = transform;
                 objectPickUp.GetComponent<Rigidbody>().isKinematic = true;
                 isPickUp = true;
@@ -39,6 +43,10 @@ public class PickUpController : MonoBehaviour
     }
 
     void DropObject () {
+        Collider objectCollider = objectPickUp.GetComponent<Collider>();
+        if (objectCollider) {
+            objectCollider.enabled = true;
+        }
         objectPickUp.GetComponent<Rigidbody>().isKinematic = false;
         objectPickUp.parent = null;
         objectPickUp.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
