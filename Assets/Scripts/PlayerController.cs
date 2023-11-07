@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode runKey = KeyCode.LeftShift;
+
+    [Header("Camera")]
+    public Transform camera;
+
     [Header("Movement")]
     public float runningSpeed = 50f;
     public float walkingSpeed = 25f;
@@ -25,14 +29,16 @@ public class Player : MonoBehaviour
     
     bool readyToJump;
 
+    [Header("Other")]
     public Transform orientation;
+    public Transform pickUpObject;
 
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
     private Rigidbody rb;
 
-    public State state;
+    private State state;
 
     public enum State {
         Normal,
@@ -45,6 +51,7 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
         moveSpeed = walkingSpeed;
         readyToJump = true;
+        state = State.Normal;
     }
 
     private void Update() {
@@ -58,6 +65,8 @@ public class Player : MonoBehaviour
         } else {
             rb.drag = 0f;
         }
+
+        RotatePlayer();
     }
 
     private void FixedUpdate() {
@@ -115,5 +124,12 @@ public class Player : MonoBehaviour
 
     private void ResetJump() {
         readyToJump = true;
+    }
+
+    private void RotatePlayer() {
+        Vector3 cameraForward = camera.transform.forward;
+        pickUpObject.transform.forward = cameraForward.normalized;
+        cameraForward.y = 0f;
+        transform.forward = cameraForward.normalized;
     }
 }
