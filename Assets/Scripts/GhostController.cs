@@ -25,6 +25,7 @@ public class Ghost : MonoBehaviour
     private Vector3 randomDirection;
 
     private bool playerFound;
+    public LevelLoader levelLoader;
 
     private void Start()
     {
@@ -38,7 +39,7 @@ public class Ghost : MonoBehaviour
         if (player != null)
         {
             Vector3 directionToPlayer = player.position - this.transform.position;
-            if (directionToPlayer.magnitude > 100f) {
+            if (directionToPlayer.magnitude > 50f) {
                 speed = walkingSpeed;
                 Debug.DrawRay(this.transform.position, transform.forward, Color.red, 11f);
                 if (playerFound == true) {
@@ -97,5 +98,15 @@ public class Ghost : MonoBehaviour
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookatWP, 30f * Time.deltaTime);
 
         this.transform.Translate(0, 0, speed * Time.deltaTime);
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player hit");
+            levelLoader.ReloadLevel();
+        }
     }
 }

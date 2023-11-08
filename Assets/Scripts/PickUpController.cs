@@ -49,7 +49,7 @@ public class PickUpController : MonoBehaviour
         }
         objectPickUp.GetComponent<Rigidbody>().isKinematic = false;
         objectPickUp.parent = null;
-        objectPickUp.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
+        objectPickUp.GetComponent<Rigidbody>().AddForce(transform.forward * 20f, ForceMode.Impulse);
         objectPickUp = null;
         isPickUp = false;
     }

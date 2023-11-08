@@ -13,6 +13,8 @@ public class GhostNavMeshController : MonoBehaviour
     private float hitDuration = 3f;
     private Vector3 initialPosition;
 
+    public LevelLoader levelLoader;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -55,11 +57,14 @@ public class GhostNavMeshController : MonoBehaviour
                 Vector3 newPosition = transform.position;
                 newPosition.y = 0f;
                 transform.position = newPosition;
+                Destroy(other.gameObject);
             } 
         } else if (other.CompareTag("Player"))
         {
-            transform.position = initialPosition;
             Debug.Log("Player hit");
+            transform.position = initialPosition;
+            isHit = true;
+            levelLoader.ReloadLevel();
         }
     }
 }
