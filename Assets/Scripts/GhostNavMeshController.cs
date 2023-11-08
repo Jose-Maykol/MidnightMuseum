@@ -8,13 +8,16 @@ public class GhostNavMeshController : MonoBehaviour
     public Transform player;
     private NavMeshAgent navMeshAgent;
     private Rigidbody rb;
-    private bool isHit = false;
+    private bool isHit;
     private float hitTime = 0f;
     private float hitDuration = 3f;
+    private Vector3 initialPosition;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        isHit = true;
+        initialPosition = transform.position;
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
     }
@@ -40,6 +43,7 @@ public class GhostNavMeshController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger " + other.tag);
         if (other.CompareTag("Pickable"))
         {
             Debug.Log("Ghost hit");
@@ -51,7 +55,11 @@ public class GhostNavMeshController : MonoBehaviour
                 Vector3 newPosition = transform.position;
                 newPosition.y = 0f;
                 transform.position = newPosition;
-            }
+            } 
+        } else if (other.CompareTag("Player"))
+        {
+            transform.position = initialPosition;
+            Debug.Log("Player hit");
         }
     }
 }
