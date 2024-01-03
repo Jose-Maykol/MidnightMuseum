@@ -10,7 +10,16 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Tag = " + tag);
         if (other.CompareTag(tag))
+        {
+            levelLoader.LoadNextLevel();
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        Debug.Log("Tag = " + tag);
+        if (other.gameObject.CompareTag(tag))
         {
             levelLoader.LoadNextLevel();
         }

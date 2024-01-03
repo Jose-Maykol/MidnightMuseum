@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 2/Level2.unity
     guid: d06e14def8b4a7a4bb675705e750e35a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 3/Level3.unity
     guid: 78045ce649503d6459d931dd1b0ed236
+  - enabled: 1
+    path: Assets/Scenes/Level 3/Level3.unity
+    guid: 97dba97c4946b7d4ca3259725199e7a6
   - enabled: 1
     path: Assets/Scenes/Level 3/Scenes/DungeonEscape.unity
     guid: d00d2995d83c94f5da81bb19644a00ac

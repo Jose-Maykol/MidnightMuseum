@@ -7926,6 +7926,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.27058828
       objectReference: {fileID: 0}
+    - target: {fileID: 1092514865, guid: 5878a6d7527854d0a84b133c7c6efe55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094511344, guid: 5878a6d7527854d0a84b133c7c6efe55, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2508780962454810567, guid: 5878a6d7527854d0a84b133c7c6efe55, type: 3}
       propertyPath: m_Name
       value: DungeonEscapePlatform
