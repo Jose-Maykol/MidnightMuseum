@@ -43,6 +43,7 @@ public class Ghost : MonoBehaviour
                 speed = walkingSpeed;
                 Debug.DrawRay(this.transform.position, transform.forward, Color.red, 11f);
                 if (playerFound == true) {
+                    speed = runningSpeed;
                     MoveToWaypoint();
                 } else {
                     Wander();

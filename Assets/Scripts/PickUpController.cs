@@ -28,7 +28,7 @@ public class PickUpController : MonoBehaviour
         Ray ray = new Ray(transform.position, Quaternion.Euler(0, 30, 0) * transform.forward);
         Debug.DrawRay(transform.position, transform.forward * 8f, Color.red, 1f);
         if (Physics.Raycast(ray, out hit, 8f)) {
-            if (hit.collider.CompareTag("Pickable")) {
+            if (hit.collider.CompareTag("Pickable") || hit.collider.CompareTag("key")) {
                 Debug.Log("Pickable");
                 objectPickUp = hit.collider.transform;
                 Collider objectCollider = objectPickUp.GetComponent<Collider>();

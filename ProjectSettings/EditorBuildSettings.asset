@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 3/Level3.unity
     guid: 78045ce649503d6459d931dd1b0ed236
+  - enabled: 1
+    path: Assets/Scenes/Level 3/Scenes/DungeonEscape.unity
+    guid: d00d2995d83c94f5da81bb19644a00ac
   m_configObjects: {}
