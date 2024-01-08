@@ -9517,9 +9517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpKey: 32
-  runKey: 306
+  runKey: 304
   camera: {fileID: 672999087}
-  runningSpeed: 50
+  runningSpeed: 70
   walkingSpeed: 30
   jumpForce: 30
   jumpColdDown: 0.5
@@ -9527,7 +9527,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 1024
-  groundDrag: 5
+  groundDrag: 6
   playerHeight: 4
   orientation: {fileID: 1292699095}
   pickUpObject: {fileID: 1718418446}
